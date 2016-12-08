@@ -1,0 +1,102 @@
+<script type="text/ng-template" id="list.html">
+    <ul dnd-list="list">
+        <li ng-repeat="item in list"
+            dnd-draggable="item"
+            dnd-effect-allowed="move"
+            dnd-moved="list.splice($index, 1)"
+            dnd-selected="models.selected = item"
+            ng-class="{selected: models.selected === item}"
+            ng-include="item.type + '.html'">
+        </li>
+    </ul>
+</script>
+<script type="text/ng-template" id="container.html">
+    <div class="container-element box box-blue">
+        <h3>{{item.id}}</h3>
+        <div class="column" ng-repeat="list in item.columns" ng-include="'list.html'"></div>
+        <div class="clearfix"></div>
+    </div>
+</script>
+<script type="text/ng-template" id="template.html">
+        <div ng-include="models.selected.type+'_formtemplate.html'"></div>
+        <div class="clearfix"></div>
+</script>
+<script type="text/ng-template" id="item.html">
+    <div class="item">Item {{item.id}}</div>
+</script>
+<script type="text/ng-template" id="label.html">
+    <div class="item">{{item.label}}</div>
+</script>
+<script type="text/ng-template" id="text.html">
+    <div class="item">{{item.label}}: <input type="text" id="{{item.id}}/"></div>
+</script>
+<script type="text/ng-template" id="label_formtemplate.html">
+    <div class="item">
+		Value : <input type="text" ng-model="models.selected.label" class="form-control"/>
+    	Id :<input type="text" ng-model="models.selected.id" class="form-control"/>
+	</div>	
+</script>
+<script type="text/ng-template" id="text_formtemplate.html">
+    <div class="item">
+		Value : <input type="text" ng-model="models.selected.label" class="form-control"/>
+    	Id :<input type="text" ng-model="models.selected.id" class="form-control"/>
+	</div>	
+</script>
+<script type="text/ng-template" id="container_formtemplate.html">
+    <div class="item">
+		Column Size :<input type="text" ng-model="models.selected.columnsize" ng-blur="setColoumns()" class="form-control"/>
+    	Id :<input type="text" ng-model="models.selected.id" class="form-control"/>
+	</div>	
+</script>
+<div class="row">
+	<div class="col-md-12">
+    <div ng-if="models.selected" class="box box-grey box-padding">
+        <h3>Update Details 
+        	<div style="display:inline-bock; float:right;">
+        	<button type="button" class="btn btn-default btn-xs" ng-click="models.selected=null">Done</button>
+        	</div></h3>
+        <strong>Type: </strong> {{models.selected.type}}<br>
+        <div ng-include="'template.html'"></div>
+    </div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+    <div class="toolbox box box-grey box-padding">
+        <h3>New Elements</h3>
+        <ul>
+            <li ng-repeat="item in models.templates"
+                dnd-draggable="item"
+                dnd-effect-allowed="copy"
+                dnd-copied="item.id = item.id + 1"
+                >
+                <button type="button" class="btn btn-default btn-xs" disabled="disabled">{{item.type}}</button>
+            </li>
+        </ul>
+        <div class="trashcan">
+			<ul dnd-list="[]">
+		    	<li><img src="formeditor/trashcan0.jpg"></li>
+		   	</ul>
+    	</div>
+	</div>
+	</div>
+</div>
+<div class="row">
+<div class="col-md-12">
+    <div class="row">
+        <div ng-repeat="(zone, list) in models.dropzones" class="col-md-12">
+            <div class="dropzone box box-yellow">
+                <!-- The dropzone also uses the list template -->
+                <h3>Dropzone {{zone}}</h3>
+                <div ng-include="'list.html'"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-12">    
+    <h2>Generated Model</h2>
+    <pre>{{modelAsJson}}</pre>
+</div>
+</div>
