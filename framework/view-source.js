@@ -1,4 +1,4 @@
-angular.module("demo").directive('viewSource', function($http, $timeout) {
+angular.module("UIGen2").directive('viewSource', function($http, $timeout) {
     return {
         scope: {
             demoName: "@viewSource",

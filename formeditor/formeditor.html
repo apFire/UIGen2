@@ -30,6 +30,12 @@
 <script type="text/ng-template" id="text.html">
     <div class="item">{{item.label}}: <input type="text" id="{{item.id}}/"></div>
 </script>
+<script type="text/ng-template" id="item_formtemplate.html">
+    <div class="item">
+		Value : <input type="text" ng-model="models.selected.label" class="form-control"/>
+    	Id :<input type="text" ng-model="models.selected.id" class="form-control"/>
+	</div>	
+</script>
 <script type="text/ng-template" id="label_formtemplate.html">
     <div class="item">
 		Value : <input type="text" ng-model="models.selected.label" class="form-control"/>
@@ -53,7 +59,7 @@
     <div ng-if="models.selected" class="box box-grey box-padding">
         <h3>Update Details 
         	<div style="display:inline-bock; float:right;">
-        	<button type="button" class="btn btn-default btn-xs" ng-click="models.selected=null">Done</button>
+        		<button type="button" class="btn btn-default btn-xs" ng-click="models.selected=null">Done</button>
         	</div></h3>
         <strong>Type: </strong> {{models.selected.type}}<br>
         <div ng-include="'template.html'"></div>
@@ -95,8 +101,12 @@
 </div>
 </div>
 <div class="row">
-<div class="col-md-12">    
+<div class="col-md-11">    
     <h2>Generated Model</h2>
     <pre>{{modelAsJson}}</pre>
+</div>
+<div class="col-md-1">
+   <h2>Action</h2>
+   <button type="button" class="btn btn-primary btn-xs" ng-click="postData()">Post</button>
 </div>
 </div>

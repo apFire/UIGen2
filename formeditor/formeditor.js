@@ -1,7 +1,7 @@
 /**
  * The controller doesn't do much more than setting the initial data model
  */
-angular.module("demo").controller("NestedListsDemoController", function($scope) {
+angular.module("UIGen2").controller("NestedListsDemoController",['$scope','DataInterop', function($scope, DataInterop) {
 
     $scope.models = {
         selected: null,
@@ -24,4 +24,8 @@ angular.module("demo").controller("NestedListsDemoController", function($scope) 
     		$scope.models.selected.columns.push([]);
     	};
     };
-});
+    $scope.postData = function() {
+    	debugger;
+    	DataInterop.setJson($scope.models.dropzones);	
+    }
+}]);

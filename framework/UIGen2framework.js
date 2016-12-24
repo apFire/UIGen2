@@ -1,4 +1,4 @@
-angular.module("demo", ["ngRoute", "dndLists"])
+angular.module("UIGen2", ["ngRoute", "dndLists"])
     .config(function($routeProvider) {
         $routeProvider
             .when('/formeditor', {

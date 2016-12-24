@@ -30,7 +30,7 @@
 <script type="text/ng-template" id="text.html">
     <div class="item">{{item.label}}: <input type="text" id="{{item.id}}/"></div>
 </script>
-<div class="row">
+<div class="row" ng-init="init()">
 <div class="col-md-12">
     <div class="row">
         <div ng-repeat="(zone, list) in models.dropzones" class="col-md-12">
